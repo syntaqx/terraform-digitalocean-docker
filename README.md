@@ -21,7 +21,8 @@ resource "digitalocean_ssh_key" "default" {
 }
 
 module "docker" {
-  source = "../.." # "syntaqx/docker/digitalocean"
+  source  = "syntaqx/docker/digitalocean"
+  version = "0.0.1"
 
   region           = "sfo2"
   prefix           = "example-"
