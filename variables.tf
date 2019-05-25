@@ -11,7 +11,7 @@ variable "instance_count" {
 variable "region" {
   description = "The region to deploy resources to"
   type        = string
-  default     = "nyc1"
+  default     = "nyc3"
 }
 
 variable "droplet_image" {
