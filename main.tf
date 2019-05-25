@@ -4,7 +4,7 @@ data "template_file" "cloud_config" {
 
 resource "digitalocean_droplet" "instance" {
   count  = var.instance_count
-  name   = format("%s-%02d-%s", var.prefix, count.index + 1, var.region)
+  name   = format("%s-%s-%02d", var.prefix, var.region, count.index + 1)
   image  = var.droplet_image
   size   = var.size
   region = var.region
