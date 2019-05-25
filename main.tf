@@ -3,12 +3,12 @@ data "digitalocean_image" "default" {
 }
 
 resource "digitalocean_droplet" "instance" {
-  count    = var.instance_count
-  name     = format("%s-%02d-%s", var.prefix, count.index + 1, var.region)
-  image    = data.digitalocean_image.default.slug
-  size     = var.size
-  region   = var.region
-  ssh_keys = var.ssh_keys
+  count  = var.instance_count
+  name   = format("%s-%02d-%s", var.prefix, count.index + 1, var.region)
+  image  = data.digitalocean_image.default.slug
+  size   = var.size
+  region = var.region
+  tags   = var.tags
 
   monitoring         = var.monitoring
   backups            = var.backups
@@ -25,6 +25,7 @@ resource "digitalocean_droplet" "instance" {
   }
 
   user_data = file("${path.module}/templates/cloud-config.yml")
+  ssh_keys  = var.ssh_keys
 
   # Outputs cloud-init and waits for the boot to finish before allowing the
   # resource to be considered created. This asserts SSH connectivity can be
@@ -37,15 +38,6 @@ resource "digitalocean_droplet" "instance" {
     ]
   }
 
-  # https://www.digitalocean.com/docs/monitoring/how-to/upgrade-legacy-agent/
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "apt-get -y purge do-agent",
-  #     "${var.monitoring} && then curl -sSL https://insights.nyc3.cdn.digitaloceanspaces.com/install.sh | sudo bash",
-  #   ]
-  # }
-
-  tags = var.tags
 
   # If the current Droplet is part of an existing swarm it attempts to leave.
   # Existing managers attempt to demote themselves before leaving.
@@ -58,7 +50,7 @@ resource "digitalocean_droplet" "instance" {
     inline = [
       "swarm_role=$(docker node inspect --format '{{ .Spec.Role }}' self)",
       "node_id=$(docker node inspect --format '{{ .ID }}' self)",
-      "if [ $swarm_role == \"manager\" ]; then docker node demote $node_id; fi",
+      "if [ $swarm_role == 'manager' ]; then docker node demote $node_id; fi",
       "docker swarm leave -f",
     ]
   }
