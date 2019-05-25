@@ -63,7 +63,7 @@ resource "digitalocean_droplet" "instance" {
   # rely on cluster scheduling to place existing tasks while drains are occuring
 
   provisioner "local-exec" {
-    command = "sh ./scripts/wait-for-docker.sh"
+    command = "bash ./scripts/wait-for-docker.sh"
   }
 
   lifecycle {
