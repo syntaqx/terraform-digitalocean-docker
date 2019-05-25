@@ -1,3 +1,7 @@
+data "template_file" "cloud_config" {
+  template = file("${path.module}/templates/cloud-config.yml")
+}
+
 data "digitalocean_image" "default" {
   slug = "docker-18-04"
 }
@@ -24,7 +28,7 @@ resource "digitalocean_droplet" "instance" {
     timeout     = "2m"
   }
 
-  user_data = file("${path.module}/templates/cloud-config.yml")
+  user_data = data.template_file.cloud_config.rendered
   ssh_keys  = var.ssh_keys
 
   # Outputs cloud-init and waits for the boot to finish before allowing the
