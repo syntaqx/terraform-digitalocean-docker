@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run: terraform init
       - run: "[ -z \"$(terraform fmt -write=false)\" ] || { terraform fmt -write=false -diff; exit 1; }"
-      - run: terraform validate -check-variables=false
+      - run: terraform validate
 workflows:
   version: 2
   deploy:

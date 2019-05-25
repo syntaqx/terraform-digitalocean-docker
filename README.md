@@ -1,5 +1,7 @@
 # DigitalOcean Docker Terraform module
 
+[![CircleCI](https://circleci.com/gh/syntaqx/swarm-api.svg?style=svg)](https://circleci.com/gh/syntaqx/swarm-api)
+
 Terraform module to create and configure Docker Droplet resources on
 DigitalOcean.
 
