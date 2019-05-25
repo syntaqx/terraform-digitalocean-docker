@@ -41,8 +41,6 @@ resource "digitalocean_droplet" "instance" {
 
   # If the current Droplet is part of an existing swarm it attempts to leave.
   # Existing managers attempt to demote themselves before leaving.
-  # If the current Droplet is part of an existing swarm it attempts to leave.
-  # Existing managers attempt to demote themselves before leaving.
   provisioner "remote-exec" {
     when       = destroy
     on_failure = continue
