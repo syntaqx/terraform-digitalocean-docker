@@ -51,7 +51,7 @@ variable "ssh_keys" {
 }
 
 variable "private_key_path" {
-  description = "The file path to the private SSH key. If this is a file, it can be read using the file interpolation function"
+  description = "The file path to the private SSH key. This path will be interpolated with the file function"
   type        = string
 }
 
