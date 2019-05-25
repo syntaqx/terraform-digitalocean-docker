@@ -1,0 +1,31 @@
+#cloud-config
+package_update: true
+package_upgrade: false
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+
+write_files:
+  - path: /etc/cron.hourly/docker-prune.sh
+    content: |
+      #!/bin/bash
+      docker system prune --force
+  - path: /etc/docker/daemon.json
+    content: |
+      {
+        "iptables": false
+      }
+  - path: /etc/systemd/system/docker.service.d/override.conf
+    content: |
+      [Service]
+      ExecStart=
+      ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375
+runcmd:
+  - apt-get purge -y ufw
+  - iptables -I INPUT -j ACCEPT
+  - systemctl daemon-reload
+  - systemctl restart docker.service

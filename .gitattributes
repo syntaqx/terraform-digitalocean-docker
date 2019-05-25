@@ -1,0 +1,29 @@
+# gitattributes - defining attributes per path.
+# https://git-scm.com/docs/gitattributes
+# https://help.github.com/en/articles/ignoring-files
+
+# Automatically normalize line endings for all text-based files
+# https://git-scm.com/docs/gitattributes#_end_of_line_conversion
+
+* text=auto
+
+# For the following file types, normalize line endings to LF on checkin and
+# prevent conversion to CRLF when they are checked out (this is required in
+# order to prevent newline related issues)
+
+.*         text eol=lf
+*.css      text eol=lf
+*.go       text eol=lf
+*.html     text eol=lf
+*.js       text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+*.sh       text eol=lf
+*.scss     text eol=lf
+*.svg      text eol=lf
+*.tf       text eol=lf
+*.tfvars   text eol=lf
+*.xml      text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+LICENSE    text eol=lf
