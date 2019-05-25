@@ -3,17 +3,17 @@ data "digitalocean_image" "default" {
 }
 
 resource "digitalocean_droplet" "instance" {
-  count    = var.number
+  count    = var.instance_count
   name     = format("%s-%02d-%s", var.prefix, count.index + 1, var.region)
   image    = data.digitalocean_image.default.slug
   size     = var.size
   region   = var.region
   ssh_keys = var.ssh_keys
 
-  private_networking = true
-  monitoring         = true
-  backups            = true
-  ipv6               = true
+  monitoring         = var.monitoring
+  backups            = var.backups
+  private_networking = var.private_networking
+  ipv6               = var.ipv6
 
   connection {
     host        = self.ipv4_address
