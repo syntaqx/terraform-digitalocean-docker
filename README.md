@@ -9,11 +9,6 @@ DigitalOcean.
 
 * [Terraform 0.12](https://www.terraform.io/) or newer
 
-## Usage
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## License
 
 [MIT]: https://opensource.org/licenses/MIT
