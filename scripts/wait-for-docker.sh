@@ -20,7 +20,7 @@ while true; do
     fi
   else
     log "Docker available"
-    log "Waiting for Droplet to finalize..."
+    log "Waiting 30s for Droplet to finalize..."
     sleep 30
     exit 0
   fi
