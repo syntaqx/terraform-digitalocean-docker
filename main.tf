@@ -50,9 +50,9 @@ resource "digitalocean_droplet" "instance" {
     on_failure = continue
 
     inline = [
-      "swarm_role=$(docker node inspect --format '{{ .Spec.Role }}' self)",
-      "node_id=$(docker node inspect --format '{{ .ID }}' self)",
-      "if [ $swarm_role == 'manager' ]; then docker node demote $node_id; fi",
+      "node_role=$(docker node inspect --format '{{ .Spec.Role }}' self)",
+      "node_self=$(docker node inspect --format '{{ .ID }}' self)",
+      "if [ $node_role == 'manager' ]; then docker node demote $node_self; fi",
       "docker swarm leave -f",
     ]
   }
@@ -72,4 +72,3 @@ resource "digitalocean_droplet" "instance" {
     create_before_destroy = true
   }
 }
-
