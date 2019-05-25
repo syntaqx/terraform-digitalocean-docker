@@ -1,12 +1,6 @@
 # gitignore - Specifies intentionally untracked files and folders to ignore.
 # https://git-scm.com/docs/gitignore
 
-# Cache objects
-packer_cache/
-
-# For built boxes
-*.box
-
 # Local .terraform directories
 **/.terraform/*
 
