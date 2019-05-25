@@ -2,14 +2,10 @@ data "template_file" "cloud_config" {
   template = file("${path.module}/templates/cloud-config.yml")
 }
 
-data "digitalocean_image" "default" {
-  slug = "docker-18-04"
-}
-
 resource "digitalocean_droplet" "instance" {
   count  = var.instance_count
   name   = format("%s-%02d-%s", var.prefix, count.index + 1, var.region)
-  image  = data.digitalocean_image.default.slug
+  image  = var.droplet_image
   size   = var.size
   region = var.region
   tags   = var.tags
@@ -42,7 +38,6 @@ resource "digitalocean_droplet" "instance" {
     ]
   }
 
-
   # If the current Droplet is part of an existing swarm it attempts to leave.
   # Existing managers attempt to demote themselves before leaving.
   provisioner "remote-exec" {
@@ -64,11 +59,17 @@ resource "digitalocean_droplet" "instance" {
   # Note that this does not observe application provisioning uptime. We instead
   # rely on cluster scheduling to place existing tasks while drains are occuring
 
-  provisioner "local-exec" {
-    command = "bash ${path.module}/scripts/wait-for-docker.sh"
-  }
+  # Note: This is currently disabled as the argument cannot be updatedd in-place
+  # due to remote API limitations and it's currently leaving artifacts when
+  # creation fails. This will be revisited when resources can be created without
+  # module failure. Additionally, research is needed for random API failures.
 
-  lifecycle {
-    create_before_destroy = true
-  }
+  # provisioner "local-exec" {
+  #   count   = var.zero_downtime_lifecycle == true ? 1 : 0
+  #   command = "bash ${path.module}/scripts/wait-for-docker.sh"
+  # }
+
+  # lifecycle {
+  #   create_before_destroy = var.zero_downtime_lifecycle
+  # }
 }
