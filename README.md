@@ -3,7 +3,7 @@
 Terraform module to create and configure Docker Droplet resources on
 DigitalOcean.
 
-![module](./docs/readme-banner.png)
+![module](https://raw.githubusercontent.com/syntaqx/terraform-digitalocean-docker/master/docs/readme-banner.png)
 
 ## Requirements
 
