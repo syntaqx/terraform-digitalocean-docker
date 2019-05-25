@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  validate_terraform:
+    docker:
+      - image: hashicorp/terraform:0.12.0
+    steps:
+      - checkout
+      - run: terraform init
+      - run: "[ -z \"$(terraform fmt -write=false)\" ] || { terraform fmt -write=false -diff; exit 1; }"
+      - run: terraform validate -check-variables=false
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - validate_terraform

@@ -1,0 +1,16 @@
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.2.3
+  hooks:
+  - id: check-byte-order-marker
+  - id: check-merge-conflict
+  - id: check-yaml
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+
+- repo: https://github.com/syntaqx/git-hooks
+  rev: v0.0.16
+  hooks:
+  - id: circleci-config-validate
+  - id: forbid-binary
+  - id: shellcheck
+  - id: shfmt
