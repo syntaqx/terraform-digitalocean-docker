@@ -58,7 +58,7 @@ resource "digitalocean_droplet" "instance" {
     inline = [
       "swarm_role=$(docker node inspect --format '{{ .Spec.Role }}' self)",
       "node_id=$(docker node inspect --format '{{ .ID }}' self)",
-      "if [ $swarm_role == 'manager' ]; then docker node demote $node_id; fi",
+      "if [ $swarm_role == \"manager\" ]; then docker node demote $node_id; fi",
       "docker swarm leave -f",
     ]
   }
