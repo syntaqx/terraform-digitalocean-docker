@@ -1,16 +1,19 @@
-output "droplet_ipv4_addr" {
+output "urn" {
+  value = digitalocean_droplet.instance.*.urn
+}
+
+output "ipv4_address" {
   value = digitalocean_droplet.instance.*.ipv4_address
 }
 
-output "droplet_ipv4_addr_private" {
+output "ipv4_address_private" {
   value = digitalocean_droplet.instance.*.ipv4_address_private
 }
 
-output "droplet_ipv6_addr" {
+output "ipv6_address" {
   value = digitalocean_droplet.instance.*.ipv6_address
 }
 
-output "droplet_ipv6_addr_private" {
+output "ipv6_addr_private" {
   value = digitalocean_droplet.instance.*.ipv6_address_private
 }
-
