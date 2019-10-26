@@ -58,4 +58,11 @@ variable "ssh_keys" {
 variable "private_key_path" {
   description = "The file path to the private SSH key. This path will be interpolated with the file function"
   type        = string
+  default     = null
+}
+
+variable "ssh_agent" {
+  description = "Whether or not to use the SSH agent to authenticate"
+  type        = bool
+  default     = false
 }
